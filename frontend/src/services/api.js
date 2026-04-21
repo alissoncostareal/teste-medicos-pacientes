@@ -75,8 +75,16 @@ export async function updateMedico(id, data) {
 
 export async function deleteMedico(id) {
   const res = await fetch(`${PHP_API}/medicos/${id}`, {
-    method: 'DELETE',
+    method: 'DELETE'
   });
+
+  if (res.status === 204) {
+    return { success: true };
+  }
+
+  if (!res.ok) {
+    throw new Error('Erro ao deletar');
+  }
 
   return res.json();
 }

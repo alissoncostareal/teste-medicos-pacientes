@@ -44,7 +44,8 @@ export default function Medicos() {
   }
 
   async function handleDelete(id) {
-    if (!confirm('Deseja remover?')) return;
+    const confirmDelete = window.confirm('Deseja remover?');
+    if (!confirmDelete) return;
 
     await deleteMedico(id);
 
@@ -53,7 +54,8 @@ export default function Medicos() {
       setForm({ nome: '', CRM: '', UFCRM: '' });
     }
 
-    setMedicos((prev) => prev.filter((m) => m.id !== id));
+    //setMedicos((prev) => prev.filter((m) => m.id !== id));
+    await fetchMedicos();
   }
 
   function handleEdit(m) {
